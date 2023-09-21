@@ -14,36 +14,36 @@ $(function () {
   $(document).ready(function () {
     $(".saveBtn").on("click", function (event) {
       let taskText = $(event.target).siblings(".description").val();
-      let key = $(this).parent().attr('id');
+      let key = $(this).parent().attr("id");
       localStorage.setItem(key, taskText);
     });
   });
   //
 
-  timeBlock.each(function(i) {
+  timeBlock.each(function (i) {
     let currentHour = dayjs().format("HH");
     let id = timeBlock[i].id;
     let hour = parseInt(id.split("-")[1]);
     if (currentHour == hour) {
-      $(this).addClass('present')
-    } else if (currentHour < hour) {
-      $(this).addClass('past')
+      $(this).addClass("present");
+    } else if (currentHour > hour) {
+      $(this).addClass("past");
     } else {
-      $(this).addClass('future')
+      $(this).addClass("future");
     }
-  })
+  });
 
   // TODO: Add code to get any user input that was saved in localStorage and set
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
-  timeBlock.each(function(i) {
+  timeBlock.each(function (i) {
     let key = timeBlock[i].id;
     if (localStorage.getItem(key) === undefined) {
       toDo.eq(i).text("");
     } else {
       toDo.eq(i).text(localStorage.getItem(key));
     }
-  })
+  });
   // TODO: Add code to display the current date in the header of the page.
   let date = $("#currentDay");
   date.text(dayjs().format("MMMM D, YYYY"));
